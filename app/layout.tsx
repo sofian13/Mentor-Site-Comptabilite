@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* Orbe lumineuse unique (statique) */}
           <div className="absolute top-[18%] left-[68%] -translate-x-1/2 -translate-y-1/2 orb" aria-hidden />
         </div>
-
+<div className="h-9 sm:h-6 supports-safe:mt-[env(safe-area-inset-top)]" />
         {children}
       </body>
     </html>

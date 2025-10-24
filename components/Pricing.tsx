@@ -1,72 +1,41 @@
-// app/components/Pricing.tsx
 "use client";
-import React, { useState } from "react";
+import React from "react";
+import HorizontalSnap from "./HorizontalSnap";
 
-function PriceCard({ title, price, features }: { title: string; price: string; features: string[] }) {
+function Card({ title, price, features }: { title: string; price: string; features: string[] }) {
   return (
-    <div className="card p-6 flex flex-col justify-between">
-      <div>
-        <div className="text-sm text-white/70">{title}</div>
-        <div className="mt-3 text-2xl font-bold text-white">{price}</div>
-        <ul className="mt-4 space-y-2 text-sm text-white/70">
-          {features.map((f, i) => (
-            <li key={i}>• {f}</li>
-          ))}
-        </ul>
-      </div>
-      <div className="mt-6">
-        <button className="btn-primary w-full">Choisir</button>
-      </div>
-    </div>
+    <article className="min-w-0 overflow-hidden rounded-3xl border border-white/12 bg-[rgba(10,14,40,0.6)] p-5 sm:p-6 backdrop-blur">
+      <h3 className="text-white/90">{title}</h3>
+      <p className="mt-2 text-2xl font-semibold text-white">{price}</p>
+      <ul className="mt-4 space-y-2 text-white/80">
+        {features.map((f, i) => <li key={i}>• {f}</li>)}
+      </ul>
+      <button className="mt-6 w-full rounded-full bg-[#4b6bff] px-4 py-3 font-medium text-white hover:opacity-95">Choisir</button>
+    </article>
   );
 }
 
 export default function Pricing() {
-  const [annual, setAnnual] = useState(false);
-
-  const monthly = [
-    { t: "Créer (solo)", p: "€19,99/mois", f: ["Wizard guidé", "Documents PDF", "Support email"] },
-    { t: "Gérer", p: "€23,99/mois", f: ["Déclarations", "Exports compta", "Rappels"] },
-    { t: "Pack Complet", p: "€39,99/mois", f: ["Tout compris", "Assistance prioritaire"] },
+  const items = [
+    { title: "Créer (solo)", price: "€19,99/mois", features: ["Wizard guidé", "Documents PDF", "Support email"] },
+    { title: "Gérer", price: "€23,99/mois", features: ["Déclarations", "Exports compta", "Rappels"] },
+    { title: "Pack Complet", price: "€39,99/mois", features: ["Tout compris", "Assistance prioritaire", "Mises à jour"] },
   ];
-
-  const yearly = [
-    { t: "Créer (solo)", p: "€179/an", f: ["Wizard guidé", "Documents PDF", "Support email"] },
-    { t: "Gérer", p: "€199/an", f: ["Déclarations", "Exports compta", "Rappels"] },
-    { t: "Pack Complet", p: "€399/an", f: ["Tout compris", "Assistance prioritaire"] },
-  ];
-
-  const setPlan = () => {
-    /* placeholder: rediriger vers la page de checkout ou modal */
-    alert("Processus de souscription (placeholder)");
-  };
 
   return (
-    <section className="mx-auto mt-12 max-w-7xl px-6 lg:px-8" aria-labelledby="pricing">
-      <div className="flex items-center justify-between">
-        <h3 id="pricing" className="text-lg font-semibold text-white">Tarifs</h3>
-        <div className="flex items-center gap-3 text-sm">
-          <span className="text-white/70">Mensuel</span>
-          <button
-            aria-pressed={annual}
-            onClick={() => setAnnual(!annual)}
-            className="relative inline-flex h-6 w-12 items-center rounded-full p-0.5 bg-white/6"
-          >
-            <span className={`h-5 w-5 rounded-full bg-white transition-transform ${annual ? "translate-x-6" : "translate-x-0"}`} />
-          </button>
-          <span className="text-white/70">Annuel</span>
-        </div>
+    <section id="tarifs" className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-14">
+      {/* Mobile: swipe ; Desktop: grid */}
+      <div className="md:hidden">
+        <HorizontalSnap>
+          {items.map((it) => <Card key={it.title} {...it} />)}
+        </HorizontalSnap>
       </div>
 
-      <div className="grid gap-4 mt-6 md:grid-cols-3">
-        {(annual ? yearly : monthly).map((p) => (
-          <div key={p.t} className="relative">
-            <PriceCard title={p.t} price={p.p} features={p.f} />
-          </div>
-        ))}
+      <div className="hidden md:grid grid-cols-3 gap-6">
+        {items.map((it) => <Card key={it.title} {...it} />)}
       </div>
 
-      <div className="mt-4 text-sm text-white/60">Tous les prix s'entendent TTC. Essai 7 jours possible.</div>
+      <p className="mt-6 text-center text-sm text-white/60">Tous les prix s’entendent TTC. Essai 7 jours possible.</p>
     </section>
   );
 }
