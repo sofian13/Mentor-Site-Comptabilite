@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+
+/* ==============
+   Fond général
+   ============== */
+:root {
+  --ink-900: #0b1020;
+  --neon-500: #4c6fff;
+  --neon-700: #2041ff;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--ink-900);
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-image:
+    radial-gradient(1000px 600px at 80% 10%, rgba(76,111,255,0.25), transparent 70%),
+    radial-gradient(800px 500px at 20% 40%, rgba(70,0,255,0.20), transparent 60%),
+    radial-gradient(600px 400px at 50% 90%, rgba(0,200,255,0.18), transparent 60%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+/* =====================
+   Composants visuels
+   ===================== */
+
+/* effet “verre” pour les cartes */
+/* Icône dans un “médaillon” + taille */
+.icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;   /* 40px */
+  height: 2.5rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(255,255,255,0.14);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  box-shadow:
+    0 10px 30px rgba(76,111,255,0.18),
+    inset 0 0 0 1px rgba(255,255,255,0.06);
+  backdrop-filter: blur(8px);
+}
+
+/* Card un peu plus nette (garde ta .card existante si tu préfères) */
+.card {
+  position: relative;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(15,18,33,0.55);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 12px 50px rgba(76,111,255,0.10);
+}
+
+/* Hover très doux */
+.card:hover .icon-wrap {
+  transform: translateY(-1px);
+  box-shadow:
+    0 16px 40px rgba(76,111,255,0.28),
+    inset 0 0 0 1px rgba(255,255,255,0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+
+/* bouton principal */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: white;
+  background-image: linear-gradient(to bottom, var(--neon-500), var(--neon-700));
+  box-shadow: 0 10px 40px rgba(76,111,255,0.25);
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+.btn-primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+/* badge semi-transparent */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(14px);
+}
+
+/* séparateur */
+.hr {
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* halo du hero */
+
+
+/* Ajustements responsive */
+@media (max-width: 768px) {
+  .card { padding: 1rem; }
+  .btn-primary { font-size: 0.8rem; }
+  .badge { font-size: 0.7rem; }
+}
