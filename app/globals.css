@@ -147,3 +147,35 @@ body {
   scrollbar-width: none;    /* Firefox */
 }
 .hide-scrollbar::-webkit-scrollbar{ display:none; }
+/* ===== Mobile & iOS smoothing ===== */
+html, body { height: auto; min-height: 100%; }
+@supports (height: 100svh) {
+  .min-h-screen { min-height: 100svh; } /* si tu l’utilises */
+}
+
+/* safe-area helpers */
+.supports-safe\:pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+.supports-safe\:mt-safe {
+  margin-top: env(safe-area-inset-top);
+}
+
+/* Empêche le scroll quand menu mobile ouvert */
+.no-scroll, .no-scroll body {
+  overflow: hidden !important;
+}
+
+/* Petites barres du burger (juste pour le style) */
+.i-bar {
+  position: relative;
+}
+.i-bar::before, .i-bar::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: currentColor;
+}
+.i-bar::before { top: -6px; }
+.i-bar::after  { top:  6px; }
