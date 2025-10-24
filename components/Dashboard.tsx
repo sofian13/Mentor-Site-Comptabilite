@@ -1,42 +1,50 @@
-// components/Dashboard.tsx
 "use client";
-import Sparkline from "./Sparkline";
+import React from "react";
+import ChartLine from "./ChartLine";
 
 export default function Dashboard() {
-  // Remplace ce mock par tes données réelles si besoin
-  const data = [10, 12, 11, 14, 15, 13, 16, 19, 18, 22, 24, 23];
-
   return (
-    <section id="dashboard" className="mx-auto max-w-7xl px-6 py-14">
-      <div className="grid lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 card">
-          <div className="flex items-center justify-between">
-            <h3 className="font-semibold">Chiffre d'affaires</h3>
-            <div className="badge">+ 84,50 €</div>
+    <section className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+      {/* Grid responsive : 1 col sur mobile, 2 cols dès md */}
+      <div className="grid grid-cols-1 gap-4 md:gap-6 md:grid-cols-2">
+        {/* Carte CHIFFRE D'AFFAIRES */}
+        <article className="min-w-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0c1230]/60 p-4 sm:p-5 backdrop-blur">
+          <header className="mb-3 sm:mb-4">
+            <p className="text-sm text-white/70">Chiffre d'affaires</p>
+            <p className="text-xs text-white/40">Variation</p>
+          </header>
+
+          {/* Graphe responsive clipé */}
+          <ChartLine />
+
+          {/* Ligne séparatrice qui ne déborde pas */}
+          <div className="mt-4 h-px w-full bg-white/10" />
+        </article>
+
+        {/* CARTE “Bloc du bas” (Année / KPI / Notifications) */}
+        <article className="min-w-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0c1230]/60 p-4 sm:p-5 backdrop-blur">
+          <div className="grid grid-cols-1 gap-4 sm:gap-5">
+            <div>
+              <p className="text-sm text-white/70">Année</p>
+              <p className="text-base sm:text-lg font-medium text-white">Année 9</p>
+            </div>
+
+            <div className="h-px w-full bg-white/10" />
+
+            <div>
+              <p className="text-sm text-white/70">Chiffre d'affaires</p>
+              <p className="text-2xl sm:text-3xl font-semibold text-white">23,6 k €</p>
+            </div>
+
+            <div className="h-px w-full bg-white/10" />
+
+            <div className="space-y-1.5">
+              <p className="text-sm text-white/70">Notifications</p>
+              <p className="text-sm text-white/90">Déclaration mensuelle prête</p>
+              <p className="text-sm text-white/90">2 reçus à valider</p>
+            </div>
           </div>
-          <div className="mt-2 text-sm text-white/60">Variation</div>
-          <div className="mt-4">
-            <Sparkline data={data} width={560} height={140} />
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="text-sm text-white/60">Année</div>
-          <div className="text-lg font-semibold">Année 9</div>
-
-          <div className="hr my-4" />
-
-          <div className="text-sm text-white/60">Chiffre d'affaires</div>
-          <div className="text-2xl font-extrabold">23,6 k €</div>
-
-          <div className="hr my-4" />
-
-          <div className="text-sm text-white/60">Notifications</div>
-          <ul className="mt-2 space-y-2">
-            <li className="text-white/80">Déclaration mensuelle prête</li>
-            <li className="text-white/80">2 reçus à valider</li>
-          </ul>
-        </div>
+        </article>
       </div>
     </section>
   );
