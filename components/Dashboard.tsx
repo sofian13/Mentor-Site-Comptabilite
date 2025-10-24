@@ -4,7 +4,7 @@ import ChartLine from "./ChartLine";
 
 export default function Dashboard() {
   return (
-    <section className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 mt-6 sm:mt-8 lg:mt-10">
       {/* Grid responsive : 1 col sur mobile, 2 cols dès md */}
       <div className="grid grid-cols-1 gap-4 md:gap-6 md:grid-cols-2">
         {/* Carte CHIFFRE D'AFFAIRES */}
