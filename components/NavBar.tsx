@@ -6,6 +6,7 @@ import Image from "next/image";
 export default function NavBar() {
   const [open, setOpen] = React.useState(false);
 
+  // Bloque le scroll de la page quand le drawer est ouvert
   React.useEffect(() => {
     const html = document.documentElement;
     if (open) html.classList.add("no-scroll");
@@ -13,7 +14,7 @@ export default function NavBar() {
     return () => html.classList.remove("no-scroll");
   }, [open]);
 
-  // ombre après léger scroll
+  // Ombre après léger scroll
   const [elev, setElev] = React.useState(false);
   React.useEffect(() => {
     const onScroll = () => setElev(window.scrollY > 8);
@@ -23,7 +24,8 @@ export default function NavBar() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 supports-safe:pt-safe pointer-events-none">
+    // ❌ on enlève pointer-events-none
+    <header className="fixed inset-x-0 top-0 z-50 supports-safe:pt-safe">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div
           className={[
@@ -32,10 +34,13 @@ export default function NavBar() {
             "bg-[rgba(10,14,40,0.55)] backdrop-blur",
             elev ? "shadow-[0_8px_32px_rgba(0,0,0,0.35)]" : "shadow-none",
             "transition-[box-shadow]",
-            "pointer-events-auto",
           ].join(" ")}
         >
-          <Link href="/" className="ml-3 flex items-center gap-2 rounded-lg px-2 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
+          <Link
+            href="/"
+            className="ml-3 flex items-center gap-2 rounded-lg px-2 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            onClick={() => setOpen(false)}
+          >
             <Image src="/favicon.ico" alt="Mentor" width={18} height={18} className="rounded" priority />
             <span className="text-sm sm:text-base font-semibold text-white">Mentor</span>
           </Link>
@@ -44,7 +49,12 @@ export default function NavBar() {
             <Link href="#fonctionnalites" className="hover:text-white">Fonctionnalités</Link>
             <Link href="#tarifs" className="hover:text-white">Tarifs</Link>
             <Link href="#faq" className="hover:text-white">FAQ</Link>
-            <Link href="#cta" className="rounded-full bg-white/10 px-4 py-2 font-medium text-white hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">Commencer</Link>
+            <Link
+              href="#cta"
+              className="rounded-full bg-white/10 px-4 py-2 font-medium text-white hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            >
+              Commencer
+            </Link>
           </nav>
 
           <button
@@ -57,9 +67,16 @@ export default function NavBar() {
         </div>
       </div>
 
+      {/* Drawer mobile */}
       {open && (
-        <div className="fixed inset-0 z-50 md:hidden">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" onClick={() => setOpen(false)} />
+        <div className="fixed inset-0 z-50 md:hidden pointer-events-auto">
+          {/* Backdrop cliquable */}
+          <button
+            aria-label="Fermer le menu"
+            className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"
+            onClick={() => setOpen(false)}
+          />
+          {/* Panneau */}
           <div className="absolute right-0 top-0 h-full w-[86%] max-w-xs rounded-l-2xl border-l border-white/10 bg-[rgba(10,14,40,0.95)] p-5 text-white shadow-2xl">
             <div className="mb-4 flex items-center justify-between">
               <span className="text-lg font-semibold">Menu</span>
@@ -75,7 +92,13 @@ export default function NavBar() {
               <Link href="#fonctionnalites" onClick={() => setOpen(false)} className="rounded-lg px-3 py-2 hover:bg-white/10">Fonctionnalités</Link>
               <Link href="#tarifs" onClick={() => setOpen(false)} className="rounded-lg px-3 py-2 hover:bg-white/10">Tarifs</Link>
               <Link href="#faq" onClick={() => setOpen(false)} className="rounded-lg px-3 py-2 hover:bg-white/10">FAQ</Link>
-              <Link href="#cta" onClick={() => setOpen(false)} className="mt-2 rounded-xl bg-white px-4 py-3 text-center font-semibold text-[#0a0e28]">Commencer</Link>
+              <Link
+                href="#cta"
+                onClick={() => setOpen(false)}
+                className="mt-2 rounded-xl bg-white px-4 py-3 text-center font-semibold text-[#0a0e28]"
+              >
+                Commencer
+              </Link>
             </nav>
           </div>
         </div>
