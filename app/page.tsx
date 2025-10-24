@@ -5,6 +5,10 @@ import Actions from "../components/Actions";
 import Dashboard from "../components/Dashboard";
 import PricingCTA from "../components/PricingCTA";
 import FAQ from "../components/FAQ";
+import HowItWorks from "../components/HowItWorks";
+import Proofs from "../components/Proofs";
+import Pricing from "../components/Pricing";
+import FinalCTA from "../components/FinalCTA";
 
 export default function Page() {
   return (
@@ -18,15 +22,12 @@ export default function Page() {
         {/* séparation douce */}
         <div className="h-6" />
 
-        <Actions />
-
-        <div className="h-6" />
-
-        <Dashboard />
-
-        <div className="h-6" />
-
-        <PricingCTA />
+        <Actions />            {/* tes 4 cards existantes */}
+<HowItWorks />
+<Dashboard />
+<Proofs />
+<Pricing />
+<FinalCTA />
 
         <FAQ />
       </div>
